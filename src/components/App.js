@@ -5,7 +5,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
 //PAGES
-import Profile from './Pages/Profile/Profile';
+import UserProfile from './Pages/UserProfile/UserProfile';
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
       <div className="cover-container text-center d-flex w-100 h-100 p-3 mx-auto flex-column">
         <Header />
         {
-          <Route path="/" exact component={Profile} />
+          <Route path="/" exact component={UserProfile} />
         }
         <Footer />
 

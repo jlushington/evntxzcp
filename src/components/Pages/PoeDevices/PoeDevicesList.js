@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 
-export default class Profile extends Component{
+export default class PoeDevicesList extends Component{
 
     render(){
         return(
             <div className="row">
-                Profile
+                Poe Devices List
             </div>
         );
     }
