@@ -2,7 +2,32 @@ import React, {Component} from 'react';
 
 export default class LocationsList extends Component{
 
+    constructor() {
+        super();
+    
+        this.state = {
+            locations: []
+        };
+      }
+
+      componentDidMount() {
+        console.info("this is that");
+        fetch('http://localhost:8000/api/location/getalllocation')
+        .then(response=>{
+            return response.json();
+        }).then(data=>{
+            console.info("data->success");
+            console.info(data);
+            this.setState({locations: data});
+        }).catch((error) => {
+            console.log("error");
+        });
+      }
+
+
     render(){
+        const rtnlocs = this.state.locations;
+
         return(
             <div class="container p-t-100">
 
@@ -20,31 +45,27 @@ export default class LocationsList extends Component{
                     <table id="example" class="table table-striped table-bordered font-regular font-75">
                         <thead>
                             <tr className="bg-grey font-bold">
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Location Type</th>
+                                <th>Location Name</th>
+                                <th>Address</th>
+                                <th>Tel</th>
+                                <th>Email</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {
+                                rtnlocs.map(rtnloc => 
                             <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
+                                <td>{rtnloc.LocationTypeID}</td>
+                                <td>{rtnloc.locationName}</td>
+                                <td>{rtnloc.locationAddress1} {rtnloc.locationAddress2}, {rtnloc.locationCity} {rtnloc.locationProvinceState}, {rtnloc.locationPostalCodeZip}</td>
+                                <td>{rtnloc.locationTel}</td>
+                                <td>{rtnloc.locationEmail}</td>
+                                <td>Edit</td>
                             </tr>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
+                            )}
+                           
                         </tbody>
                     </table>
                 </div>

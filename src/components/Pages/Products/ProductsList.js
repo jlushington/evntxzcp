@@ -12,7 +12,7 @@ export default class ProductsList extends Component{
                 </div>
 
                 <div class="col-4 text-right color-white font-light">
-                    <button>Add Event Product</button>
+                <a href="/productadd"><button>Add Event Product</button></a>
                 </div>
             </div>
 

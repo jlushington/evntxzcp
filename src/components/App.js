@@ -15,7 +15,7 @@ import UserOrdersList from './Pages/UserOrders/UserOrdersList';
 import UserReviewsList from './Pages/UserReview/UserReviewsList';
 import PoeDevicesList from './Pages/PoeDevices/PoeDevicesList'
 import LocationAdd from './Pages/Locations/LocationAdd';
-import ProductAdd from './Pages/Products/ProductsList';
+import ProductAdd from './Pages/Products/ProductAdd';
 import PoeDeviceAdd from './Pages/PoeDevices/PoeDevicesList';
 
 class App extends Component {
