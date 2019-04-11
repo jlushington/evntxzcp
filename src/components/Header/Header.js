@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
-import HomeMenu from './HomeMenu'
-import styles from './style.module.scss'
+
+import './Header.css';
 
 export default class Header extends Component{
 
     render(){
         return(
-            <div className={styles.topbar}>
-                <div className="mr-4">
-                    <HomeMenu />
+            <header className="masthead mb-auto bg-white p-b-10">
+                <div className="container">
+
+                {/* HEADER NAV */}
+                    <div className="row">
+                        <div className="col-sm-4 text-left pt-0 navigation">
+                           
+                        </div>
+                        <div className="col-sm-4 font-logo">Evntxz</div>
+                        <div className="col-sm-4"></div>
+                    </div>
                 </div>
-          </div>
+            </header>
         );
     }
 }

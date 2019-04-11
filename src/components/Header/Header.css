@@ -1,0 +1,57 @@
+			
+		
+			.font-logo {
+
+                font-family: 'BebasNeueRegular'; 
+                font-weight: normal; 
+                font-style: normal; 
+                font-size: 3rem;
+            }
+            
+            /* NAVIGATION */
+            .navigation ul {
+                font-family: 'Montserrat', sans-serif;
+                font-weight: bold;
+                font-size: 0.75rem;
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+              }
+              
+              .navigation li {
+                float: left;
+              }
+              
+              .navigation li a {
+                display: block;
+                color: #FF3B3F;
+                text-align: left;
+                padding: 14px 16px;
+                text-decoration: none;
+              }
+              
+              /* Change the link color to #111 (black) on hover */
+              .navigation li a:hover {
+                color: #A9A9A9;
+              }
+            
+              /*LIST SOCIAL MEDIA*/
+              .social ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+              }
+              
+              .social li a {
+                text-decoration: none;
+                color: #000;
+                display: block;
+                width: 100px;
+               
+                -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+                -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+                transition: font-size 0.3s ease, background-color 0.3s ease;
+              }
