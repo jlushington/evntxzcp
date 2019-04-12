@@ -1,49 +1,86 @@
 import React, {Component} from 'react';
+import FileBase64 from 'react-file-base64';
 
 export default class ProductAdd extends Component{
 
     constructor() {
         super();
         this.state={
-            locationName:'',
-            locationDescription:'',
-            locationAddress1:'', 
-            locationAddress2:'', 
-            locationProvinceState:'', 
-            locationCity:'', 
-            locationPostalCodeZip:'', 
-            locationCountry:'', 
-            locationTel:'', 
-            locationEmail:'', 
-            LocationTypeID:''
+            eventName:'',
+            eventDescription:'',
+            locationID:'', 
+            age:'', 
+            eventStartDate:'', 
+            eventEndDate:'',
+            eventPricing:[
+                {
+                    ticketPricingTitle:'',
+                    ticketPricingDescription:'',
+                    ticketPricingCurrency: '',
+                    ticketPricingAmount: '',
+                    ticketPricingNumber:'',
+                    maxTicket:'',
+                    taxesID:''
+                }
+            ],
+            eventImage:[
+                
+            ]
+       
         };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.fileupdateHandler=this.fileupdateHandler.bind(this);
         const headers= new Headers();
         headers.append('Content-Type', 'application/json');
       }
 
 
+    fileupdateHandler (files){
+        this.setState(
+            {
+                eventImage:files
+            }
+        )
+    }
+
     handleChange = (e)=>{
+
+        console.info(e.target.name);
+        console.info(e.target.value);
+
         this.setState({ [e.target.name]: e.target.value });
     }
 
     handleSubmit(event){
         event.preventDefault();
+        console.info("hangle submit")
+        console.info(this.state.eventImage[0].imageBase64)
         const data = {
-            locationName:this.state.locationName, 
-            locationDescription:this.state.locationDescription,
-            locationAddress1:this.state.locationAddress1,
-            locationAddress2:this.state.locationAddress2,
-            locationProvinceState:this.state.locationProvinceState,
-            locationCity:this.state.locationCity,
-            locationPostalCodeZip:this.state.locationPostalCodeZip,
-            locationCountry:this.state.locationCountry,
-            locationTel:this.state.locationTel,
-            locationEmail:this.state.locationEmail,
-            LocationTypeID:this.state.LocationTypeID
+            eventName:this.state.eventName, 
+            eventDescription:this.state.eventDescription,
+            locationID:this.state.locationID,
+            age:this.state.age,
+            eventStartDate:this.state.eventStartDate,
+            eventEndDate:this.state.eventEndDate,
+            eventPricing:[
+                {
+                    ticketPricingTitle:this.state.eventEticketPricingTitlendDate,
+                    ticketPricingDescription:this.state.ticketPricingDescription,
+                    ticketPricingCurrency: this.state.ticketPricingCurrency,
+                    ticketPricingAmount: this.state.ticketPricingAmount,
+                    ticketPricingNumber:this.state.ticketPricingNumber,
+                    maxTicket:this.state.maxTicket,
+                    taxesID:this.state.taxesID,
+                }
+            ],
+            eventImage:this.state.eventImage
+
+            
         };
 
-        fetch('http://localhost:8000/api/location/addlocation', {
+        console.info(data);
+
+        fetch('http://localhost:8000/api/product/addproduct', {
             method: 'POST',
             crossDomain:true,
             mode:"cors",
@@ -129,6 +166,16 @@ export default class ProductAdd extends Component{
                                     <input type="text" id="eventEndDate" aria-describedby="eventEndDate" name="eventEndDate" placeholder="Event End Date" onChange={this.handleChange} />
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Event Image </label>
+                                    <FileBase64 multiple={ true }onDone={ this.fileupdateHandler.bind(this) } />
+                                </div>
+                            </div>
+                           
                         </div>
 
                     </div>
