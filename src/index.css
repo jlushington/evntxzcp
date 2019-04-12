@@ -100,3 +100,38 @@ padding-bottom: 20px;
 .font-75{
     font-size: 0.75rem;   
 }
+
+a.linkbutton:link {
+  background-color: red;
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 20px;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+
+
+a.linkbutton:visited {
+  background-color: red;
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 20px;
+  letter-spacing: 0.01em;
+  text-shadow: none;
+}
+
+
+a.linkbutton:hover {
+  background-color: red;
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-radius: 20px;
+  letter-spacing: 0.01em;
+  text-shadow: none;;
+}

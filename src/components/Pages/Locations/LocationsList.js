@@ -12,7 +12,7 @@ export default class LocationsList extends Component{
 
       componentDidMount() {
         console.info("this is that");
-        fetch('http://localhost:8000/api/location/getalllocation')
+        fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/location/getalllocation')
         .then(response=>{
             return response.json();
         }).then(data=>{
@@ -36,8 +36,8 @@ export default class LocationsList extends Component{
                         <h1> Location Listing</h1>
                     </div>
 
-                    <div class="col-4 text-right color-white font-light">
-                        <a href="/locationadd" className="button">Add Location</a>
+                    <div class="col-4 text-right color-white font-light pt-3">
+                        <a class="linkbutton font-regular font-75" href="/locationadd">Add Location</a>
                     </div>
                 </div>
 
