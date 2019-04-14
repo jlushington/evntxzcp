@@ -16,8 +16,7 @@ export default class LocationsList extends Component{
         .then(response=>{
             return response.json();
         }).then(data=>{
-            console.info("data->success");
-            console.info(data);
+
             this.setState({locations: data});
         }).catch((error) => {
             console.log("error");

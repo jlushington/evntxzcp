@@ -12,7 +12,7 @@ export default class ProductsList extends Component{
 
       componentDidMount() {
         console.info("this is that");
-        fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/location/getalllocation')
+        fetch('http://localhost:8000/api/product/listproducts')
         .then(response=>{
             return response.json();
         }).then(data=>{
@@ -61,6 +61,7 @@ export default class ProductsList extends Component{
                                 <td>{prod.eventName}</td>
                                 <td>{prod.eventDescription}</td>
                                 <td>{prod.eventStartDate}</td>
+                                <td>{prod.eventEndDate}</td>
                                 <td>Edit</td>
                             </tr>
                             )}

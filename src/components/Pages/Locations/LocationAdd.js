@@ -5,6 +5,7 @@ export default class LocationAdd extends Component{
     constructor() {
         super();
         this.state={
+            locationType:[],
             locationName:'',
             locationDescription:'',
             locationAddress1:'', 
@@ -27,6 +28,18 @@ export default class LocationAdd extends Component{
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    componentDidMount() {
+        console.info("this is that");
+        fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/locationtype/getalllocationtype')
+        .then(response=>{
+            return response.json();
+        }).then(data=>{
+            this.setState({locationType: data});
+        }).catch((error) => {
+            console.log(error);
+        });
+      }
+
     handleSubmit(event){
         event.preventDefault();
         const data = {
@@ -43,7 +56,7 @@ export default class LocationAdd extends Component{
             LocationTypeID:this.state.LocationTypeID
         };
 
-        fetch('http://localhost:8000/api/location/addlocation', {
+        fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/location/addlocation', {
             method: 'POST',
             crossDomain:true,
             mode:"cors",
@@ -63,6 +76,7 @@ export default class LocationAdd extends Component{
 
 
     render(){
+        const loctypes = this.state.locationType;
         return(
             <div class="container p-t-100">
             <form onSubmit={this.handleSubmit}>
@@ -85,7 +99,13 @@ export default class LocationAdd extends Component{
                             <div class="row">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Location Type</label>
-                                    <input type="text" id="LocationTypeID" aria-describedby="LocationTypeID" name="LocationTypeID" placeholder="Location Type ID" onChange={this.handleChange} />
+                                    <select class="form-control" id="LocationTypeID" name="LocationTypeID" onChange={this.handleChange}>
+                                    {
+                                        loctypes.map(loctype => 
+                                        <option>{loctype.locationTypeName}</option>
+                                        )
+                                    }
+                                    </select>
                                 </div>
                             </div>
                             </div>

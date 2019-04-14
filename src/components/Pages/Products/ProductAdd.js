@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 import FileBase64 from 'react-file-base64';
+import "antd/dist/antd.css";
+import {DatePicker, TimePicker} from 'antd';
 
 export default class ProductAdd extends Component{
 
     constructor() {
         super();
         this.state={
+            locations:[],
             eventName:'',
             eventDescription:'',
             locationID:'', 
@@ -34,6 +37,18 @@ export default class ProductAdd extends Component{
         headers.append('Content-Type', 'application/json');
       }
 
+      componentDidMount() {
+        console.info("this is that");
+        fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/location/getalllocation')
+        .then(response=>{
+            return response.json();
+        }).then(data=>{
+            this.setState({locations: data});
+        }).catch((error) => {
+            console.log(error);
+        });
+      }
+
 
     fileupdateHandler (files){
         this.setState(
@@ -44,11 +59,11 @@ export default class ProductAdd extends Component{
     }
 
     handleChange = (e)=>{
-
-        console.info(e.target.name);
-        console.info(e.target.value);
-
         this.setState({ [e.target.name]: e.target.value });
+    }
+
+    handleChangeDate = (name, date, dateString)=>{
+       this.setState({ [name]: dateString });
     }
 
     handleSubmit(event){
@@ -78,8 +93,6 @@ export default class ProductAdd extends Component{
             
         };
 
-        console.info(data);
-
         fetch('http://localhost:8000/api/product/addproduct', {
             method: 'POST',
             crossDomain:true,
@@ -100,9 +113,11 @@ export default class ProductAdd extends Component{
 
 
     render(){
+        const locs = this.state.locations;
         return(
             <div class="container p-t-100">
             <form onSubmit={this.handleSubmit}>
+
                 <div class="row p-b-10">
                     <div class="col-8 font-regular">
                         <h3> Event- Info</h3>
@@ -138,8 +153,12 @@ export default class ProductAdd extends Component{
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Location</label>
                                     <select class="form-control" id="locationID" name="locationID" onChange={this.handleChange}>
-                                        <option>5c8d4016d610e332945e7612</option>
-                                        <option>Location 2</option>
+                                    {
+                                        locs.map(loc => 
+                                        <option>{loc.locationName}</option>
+                                        )
+                                    }
+
                                     </select>
                                 </div>
                                 </div>
@@ -157,13 +176,13 @@ export default class ProductAdd extends Component{
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Event Start Date</label>
-                                    <input type="text" id="eventStartDate" aria-describedby="eventStartDate" name="eventStartDate" placeholder="Event Start Date" onChange={this.handleChange} />
+                                    <DatePicker id="eventStartDate" aria-describedby="eventStartDate" name="eventStartDate" placeholder="Event Start Date" onChange={(date, dateString)=>this.handleChangeDate("eventStartDate", date, dateString)} />
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Event End Date</label>
-                                    <input type="text" id="eventEndDate" aria-describedby="eventEndDate" name="eventEndDate" placeholder="Event End Date" onChange={this.handleChange} />
+                                    <DatePicker id="eventEndDate" aria-describedby="eventEndDate" name="eventEndDate" placeholder="Event End Date" onChange={(date, dateString)=>this.handleChangeDate("eventEndDate", date, dateString)} />
                                 </div>
                             </div>
                         </div>
@@ -172,7 +191,7 @@ export default class ProductAdd extends Component{
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Event Image </label>
-                                    <FileBase64 multiple={ true }onDone={ this.fileupdateHandler.bind(this) } />
+                                    <FileBase64 multiple={ true } onDone={ this.fileupdateHandler.bind(this) } />
                                 </div>
                             </div>
                            
@@ -272,7 +291,7 @@ export default class ProductAdd extends Component{
                     <button type="submit" class="p-t-20">Save</button>
                     </div>
                 </div>
-                
+
             </form>
         </div>
         );
