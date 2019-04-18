@@ -19,6 +19,18 @@ import ProductAdd from './Pages/Products/ProductAdd';
 import PoeDeviceAdd from './Pages/PoeDevices/PoeDevicesList';
 
 class App extends Component {
+
+  componentDidMount() {
+
+    const isAuth=localStorage.getItem("isAuth");
+    const authtoken=localStorage.getItem("authtoken");
+
+    if(isAuth == true){
+
+      //VALIDATE TOKEN
+    }
+
+  }
   render() {
     return (
     <Router>
