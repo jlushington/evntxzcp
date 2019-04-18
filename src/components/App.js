@@ -17,6 +17,7 @@ import PoeDevicesList from './Pages/PoeDevices/PoeDevicesList'
 import LocationAdd from './Pages/Locations/LocationAdd';
 import ProductAdd from './Pages/Products/ProductAdd';
 import PoeDeviceAdd from './Pages/PoeDevices/PoeDevicesList';
+import TokenVerification from './TokenVerification/TokenVerification';
 
 class App extends Component {
 
@@ -25,11 +26,9 @@ class App extends Component {
     const isAuth=localStorage.getItem("isAuth");
     const authtoken=localStorage.getItem("authtoken");
 
-    if(isAuth == true){
+    var t = new TokenVerification(authtoken);
 
-      //VALIDATE TOKEN
-    }
-
+    t.verifyToken();
   }
   render() {
     return (
