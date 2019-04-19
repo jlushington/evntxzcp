@@ -21,7 +21,15 @@ import TokenVerification from './TokenVerification/TokenVerification';
 
 class App extends Component {
 
+  constructor(props){
+    super(props);
+    this.store = this.props.store;
+  }
+
   componentDidMount() {
+
+    const values= this.props
+    console.info(values);
 
     const isAuth=localStorage.getItem("isAuth");
     const authtoken=localStorage.getItem("authtoken");
@@ -160,6 +168,7 @@ class App extends Component {
                  <main>
 
                       <Header />
+                      <Route path="/:authID" exact component={UserProfile} />
                       <Route path="/userprofile" exact component={UserProfile} />
                       <Route path="/productorderslist" exact component={ProductOrdersList} />
                       <Route path="/productreviewlist" exact component={ProductReviewsList} />
