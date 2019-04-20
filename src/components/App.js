@@ -18,6 +18,7 @@ import LocationAdd from './Pages/Locations/LocationAdd';
 import ProductAdd from './Pages/Products/ProductAdd';
 import PoeDeviceAdd from './Pages/PoeDevices/PoeDevicesList';
 import TokenVerification from './TokenVerification/TokenVerification';
+import AuthCallback from './Common/AuthCallback';
 
 class App extends Component {
 
@@ -27,17 +28,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-
-    const values= this.props
-    console.info(values);
-
     const isAuth=localStorage.getItem("isAuth");
-    const authtoken=localStorage.getItem("authtoken");
 
-    var t = new TokenVerification(authtoken);
+    const values= this.props.match
+    console.info("App->componentDidMount->isAuth");
+    if(isAuth === null){
+      console.info("isAuth is null");
+    }
 
-    t.verifyToken();
   }
+
   render() {
     return (
     <Router>
@@ -168,7 +168,7 @@ class App extends Component {
                  <main>
 
                       <Header />
-                      <Route path="/:authID" exact component={UserProfile} />
+                      <Route path="/callback/:authID" exact component={AuthCallback} />
                       <Route path="/userprofile" exact component={UserProfile} />
                       <Route path="/productorderslist" exact component={ProductOrdersList} />
                       <Route path="/productreviewlist" exact component={ProductReviewsList} />
