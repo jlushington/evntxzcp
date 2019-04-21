@@ -24,7 +24,7 @@ export default class AuthCallback extends Component{
                if(data.MessageTypeID ===0){
                    console.info("error");
                }else{
-                   localStorage.setItem("authtoken", data.Message);
+                   localStorage.setItem("authToken", data.Message);
                    localStorage.setItem("isAuth", true);
 
                    // var t = new TokenVerification(authtoken);

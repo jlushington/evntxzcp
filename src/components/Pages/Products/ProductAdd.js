@@ -9,6 +9,7 @@ export default class ProductAdd extends Component{
         super();
         this.state={
             locations:[],
+            taxes:[],
             eventName:'',
             eventDescription:'',
             locationID:'', 
@@ -38,7 +39,7 @@ export default class ProductAdd extends Component{
       }
 
       componentDidMount() {
-        console.info("this is that");
+        //LOCATION
         fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/location/getalllocation')
         .then(response=>{
             return response.json();
@@ -47,6 +48,17 @@ export default class ProductAdd extends Component{
         }).catch((error) => {
             console.log(error);
         });
+
+        //TAXES
+        fetch('http://localhost:8000/api/tax/getalltaxes')
+        .then(response=>{
+            return response.json();
+        }).then(data=>{
+            this.setState({taxes: data});
+        }).catch((error) => {
+            console.log(error);
+        });
+
       }
 
 
@@ -114,6 +126,7 @@ export default class ProductAdd extends Component{
 
     render(){
         const locs = this.state.locations;
+        const taxes = this.state.taxes;
         return(
             <div class="container p-t-100">
             <form onSubmit={this.handleSubmit}>
@@ -276,7 +289,11 @@ export default class ProductAdd extends Component{
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Taxes</label>
                                     <select class="form-control" id="taxesID" name="taxesID" onChange={this.handleChange}>
-                                        <option>5c8d4016d610e332945e7612</option>
+                                    {
+                                        taxes.map(tax => 
+                                        <option>{tax.taxName}</option>
+                                        )
+                                    }
                                       
                                     </select>
                                 </div>

@@ -12,8 +12,17 @@ export default class ProductsList extends Component{
 
       componentDidMount() {
         console.info("this is that");
-        fetch('http://localhost:8000/api/product/listproducts')
-        .then(response=>{
+        fetch('http://localhost:8000/api/product/listproducts',
+        {
+            method: 'GET',
+            crossDomain:true,
+            mode:"cors",
+            headers: { 'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin':'*'
+        }
+        
+    }).then(response=>{
             return response.json();
         }).then(data=>{
             console.info("data->success");
