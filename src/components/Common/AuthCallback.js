@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {properties} from '../../properties';
 
 export default class AuthCallback extends Component{
 
@@ -14,7 +15,7 @@ export default class AuthCallback extends Component{
             randomToken: values.authID
         }
         
-        fetch('http://localhost:8100/api/auth/tokenaccess', 
+        fetch(properties.userserviceurl+'/api/auth/tokenaccess', 
         {method: 'POST',crossDomain:true, mode:"cors",
          headers: { 'Accept': 'application/json, text/plain, */*','Content-Type': 'application/json','Access-Control-Allow-Origin':'*'},
              body:  JSON.stringify(payload)
@@ -30,7 +31,7 @@ export default class AuthCallback extends Component{
                    // var t = new TokenVerification(authtoken);
                    // t.verifyToken();
                    
-                   window.location.replace("http://localhost:8081/userprofile");
+                   window.location.replace(properties.cpurl+"/userprofile");
                }
    }).catch((error) => {
        console.log(error);
