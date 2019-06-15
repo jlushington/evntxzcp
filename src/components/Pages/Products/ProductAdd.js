@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import FileBase64 from 'react-file-base64';
 import "antd/dist/antd.css";
 import {DatePicker, TimePicker} from 'antd';
+import {properties} from '../../../properties';
 
 export default class ProductAdd extends Component{
 
@@ -40,7 +41,7 @@ export default class ProductAdd extends Component{
 
       componentDidMount() {
         //LOCATION
-        fetch('http://locationservices.jx-staging.35.231.104.48.nip.io/api/location/getalllocation')
+        fetch(properties.locationserviceurl+'/api/location/getalllocation')
         .then(response=>{
             return response.json();
         }).then(data=>{
@@ -50,7 +51,7 @@ export default class ProductAdd extends Component{
         });
 
         //TAXES
-        fetch('http://localhost:8000/api/tax/getalltaxes')
+        fetch(properties.productserviceurl+'/api/tax/getalltaxes')
         .then(response=>{
             return response.json();
         }).then(data=>{
@@ -105,7 +106,7 @@ export default class ProductAdd extends Component{
             
         };
 
-        fetch('http://localhost:8000/api/product/addproduct', {
+        fetch(properties.productserviceurl+'/api/product/addproduct', {
             method: 'POST',
             crossDomain:true,
             mode:"cors",
